@@ -1,0 +1,17 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "SinjulMSBH";
+}
+
+
+<div class="row mt-4 border rounded bg-light">
+    <div class="col-6 m-auto p-2 text-center">
+        <ul class="list-group">
+            @foreach (var item in Model.ResultListString)
+            {
+                <li class="list-group-item list-group-item-action text-secondary">@item</li>
+            }
+        </ul>
+    </div>
+</div>
