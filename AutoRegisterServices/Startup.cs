@@ -9,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 
 using OtherAssemblyServices;
 
+using System;
+
 namespace AutoRegisterServices
 {
     public class Startup
@@ -39,7 +41,7 @@ namespace AutoRegisterServices
 
               .AddTypes(typeof(Service2), typeof(Service3))
 
-              .FromAssemblyOf<IService>()
+              .FromAssemblies(AppDomain.CurrentDomain.GetAssemblies())
               .AddClasses(c => c.InNamespaceOf(typeof(IService)))
               .AsSelfWithInterfaces()
               .WithTransientLifetime()
