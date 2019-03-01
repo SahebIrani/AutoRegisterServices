@@ -6,9 +6,6 @@ using OtherAssemblyServices;
 
 using OtherAssemblyServices2;
 
-using System.Collections.Generic;
-using System.Linq;
-
 namespace AutoRegisterServices.Pages
 {
     public class IndexModel : PageModel
@@ -34,7 +31,7 @@ namespace AutoRegisterServices.Pages
             OtherService2 = otherService2 ?? throw new System.ArgumentNullException(nameof(otherService2));
         }
 
-        public List<string> ResultListString { get; set; }
+        public string[] ResultListString { get; set; }
 
         public void OnGet()
         {
@@ -46,7 +43,7 @@ namespace AutoRegisterServices.Pages
                                          $"{OtherService.ReturnValue(nameof(OtherService))}," +
                                          $"{OtherService2.ReturnValue(nameof(OtherService2))}"
             ;
-            var result = servicesResult.Split(",").ToList();
+            var result = servicesResult.Split(",");
             ResultListString = result;
         }
     }
