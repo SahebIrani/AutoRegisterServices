@@ -41,7 +41,7 @@ namespace AutoRegisterServices
 
               .FromAssemblyOf<IService>()
               .AddClasses(c => c.InNamespaceOf(typeof(IService)))
-              .AsImplementedInterfaces()
+              .AsSelfWithInterfaces()
               .WithTransientLifetime()
 
               .AddClasses(c => c.AssignableTo<NewService>())
