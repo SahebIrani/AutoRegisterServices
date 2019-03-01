@@ -48,7 +48,7 @@ namespace AutoRegisterServices
 
               .AddClasses(c => c.AssignableTo<NewService>())
               .AsMatchingInterface()
-              .WithScopedLifetime()
+              .WithLifetime(ServiceLifetime.Singleton)
 
               .FromAssemblyOf<IOtherService>()
               .AddClasses(c => c.Where(type => !type.IsAbstract && type.Name.StartsWith("Other")))
