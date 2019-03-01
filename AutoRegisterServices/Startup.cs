@@ -45,7 +45,7 @@ namespace AutoRegisterServices
               .WithTransientLifetime()
 
               .AddClasses(c => c.AssignableTo<NewService>())
-              .AsImplementedInterfaces()
+              .AsMatchingInterface()
               .WithScopedLifetime()
 
               .FromAssemblyOf<IOtherService>()

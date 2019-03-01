@@ -1,4 +1,5 @@
 ﻿using AutoRegisterServices.Services;
+using AutoRegisterServices.Services2;
 
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -15,18 +16,20 @@ namespace AutoRegisterServices.Pages
         private readonly IService Service;
         private readonly IFoo Foo;
         private readonly IBar Bar;
+        private readonly INewService NewService;
         private readonly IOtherService OtherService;
         private readonly IOtherService2 OtherService2;
 
         public IndexModel(Service2 service2, Service3 service3,
                            IService service, IFoo foo, IBar bar,
-                             IOtherService otherService, IOtherService2 otherService2)
+                           INewService newService, IOtherService otherService, IOtherService2 otherService2)
         {
             Service2 = service2 ?? throw new System.ArgumentNullException(nameof(service2));
             Service3 = service3 ?? throw new System.ArgumentNullException(nameof(service3));
             Service = service ?? throw new System.ArgumentNullException(nameof(service));
             Foo = foo ?? throw new System.ArgumentNullException(nameof(foo));
             Bar = bar ?? throw new System.ArgumentNullException(nameof(bar));
+            NewService = newService ?? throw new System.ArgumentNullException(nameof(newService));
             OtherService = otherService ?? throw new System.ArgumentNullException(nameof(otherService));
             OtherService2 = otherService2 ?? throw new System.ArgumentNullException(nameof(otherService2));
         }
@@ -40,6 +43,7 @@ namespace AutoRegisterServices.Pages
                                          $"{Service.ReturnValue(nameof(Service))}," +
                                          $"{Foo.ReturnValue(nameof(Foo))}," +
                                          $"{Bar.ReturnValue(nameof(Bar))}," +
+                                         $"{NewService.ReturnValue(nameof(NewService))}," +
                                          $"{OtherService.ReturnValue(nameof(OtherService))}," +
                                          $"{OtherService2.ReturnValue(nameof(OtherService2))}"
             ;
