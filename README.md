@@ -1,8 +1,8 @@
 # AutoRegisterServices
 SinjulMSBH / automatically register your services with the ASP.NET Core 3.0 DI container ..
 
-* ASP.Net Core 3.0
-* Entity Framework Core 3.0
+* ASP.NET Core  
+* Entity Framework Core 
 * AutoMapper
 * Mapster
 * Scrutor
