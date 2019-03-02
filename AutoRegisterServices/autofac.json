@@ -1,0 +1,21 @@
+{
+    "defaultAssembly": "AutoRegisterServices",
+    "modules": [
+        {
+            "type": "AutoRegisterServices.Modules.WebApiModule",
+            "properties": {
+            }
+        },
+        {
+            "type": "AutoRegisterServices.Modules.ApplicationModule",
+            "properties": {
+            }
+        },
+        {
+            "type": "AutoRegisterServices.Modules.InfrastructureModule",
+            "properties": {
+                "SQLServerConnectionString": "Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=AutoRegisterServicesDB;Integrated Security=True"
+            }
+        }
+    ]
+}
