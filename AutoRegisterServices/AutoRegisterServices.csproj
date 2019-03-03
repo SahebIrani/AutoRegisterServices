@@ -8,6 +8,9 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="8.0.0" />
+    <PackageReference Include="GraphiQL" Version="1.2.0" />
+    <PackageReference Include="GraphQL" Version="3.0.0-preview-1107" />
+    <PackageReference Include="GraphQl.AspNetCore" Version="1.0.4.55" />
     <PackageReference Include="Mapster" Version="3.3.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.0.0-preview-19075-0444" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.0.0-preview.19074.3" />
@@ -16,6 +19,7 @@
     <PrivateAssets>all</PrivateAssets>
     <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="NetCore.AutoRegisterDi" Version="1.0.0" />
     <PackageReference Include="Scrutor" Version="3.0.2" />
     <PackageReference Include="Autofac" Version="4.9.1" />
     <PackageReference Include="Autofac.Configuration" Version="4.1.0" />

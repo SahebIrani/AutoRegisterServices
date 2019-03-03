@@ -2,9 +2,13 @@ using Autofac;
 using Autofac.Configuration;
 
 using AutoRegisterServices.Data;
+using AutoRegisterServices.GraphTypes;
 using AutoRegisterServices.Mappings;
+using AutoRegisterServices.Service;
 using AutoRegisterServices.Services;
 using AutoRegisterServices.Services2;
+
+using GraphiQl;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -12,9 +16,12 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
+using NetCore.AutoRegisterDi;
+
 using OtherAssemblyServices;
 
 using System;
+using System.Reflection;
 
 namespace AutoRegisterServices
 {
@@ -45,6 +52,24 @@ namespace AutoRegisterServices
             services.AddMvc()
                 .AddNewtonsoftJson()
                 ;
+
+            services.AddSingleton(typeof(IThing<>), typeof(GenericThing<>));
+
+            services.AddTransient<Func<string, IShoppingCart>>(serviceProvider => key =>
+            {
+                switch (key)
+                {
+                    case "API": return serviceProvider.GetService<ShoppingCartAPI>();
+                    case "DB": return serviceProvider.GetService<ShoppingCartDB>();
+                    default: return serviceProvider.GetService<ShoppingCartCache>();
+                }
+            });
+
+            var assemblyToScan = Assembly.GetExecutingAssembly();
+            //var assemblyToScan2 = Assembly.GetAssembly(typeof(Startup));
+            services.RegisterAssemblyPublicNonGenericClasses(assemblyToScan)
+                    .Where(c => c.Name.EndsWith("Service"))
+                    .AsPublicImplementedInterfaces();
 
             services.Scan(scan => scan
 
@@ -88,6 +113,12 @@ namespace AutoRegisterServices
                 };
             });
 
+            services.AddGraphQl(schema =>
+            {
+                schema.SetQueryType<EmployeeType>();
+            });
+            services.AddSingleton<EmployeeType>();
+
             services.AddMapsterConfig();
         }
 
@@ -122,7 +153,15 @@ namespace AutoRegisterServices
             app.UseSwagger();
             app.UseSwaggerUi3();
 
-            app.UseDatabaseInitial();
+            app.UseGraphiQl();
+
+            //app.UseGraphQl("/graph-api", options =>
+            //{
+            //    //options.SchemaName = "SinjulMSBH";
+            //    //options.AuthorizationPolicy = "Authenticated";
+            //});
+
+            app.EnsureSeedData();
         }
     }
 }
