@@ -8,6 +8,7 @@ SinjulMSBH / automatically register your services with the ASP.NET Core 3.0 DI c
 * Scrutor
 * Autofac
 * NSwag
+* GraphiQl
 
 ![SinjulMSBH](https://8pic.ir/uploads/DI.png)
 
