@@ -68,8 +68,13 @@ namespace AutoRegisterServices
                 }
             });
 
-            var assemblyToScan = Assembly.GetExecutingAssembly();
+
+            //Assembly assembly = AppDomain.CurrentDomain.Load(name);
+            //Assembly assembly2 = Assembly.LoadFrom(file);
             //var assemblyToScan2 = Assembly.GetAssembly(typeof(Startup));
+            Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            Assembly assemblyToScan = Assembly.GetExecutingAssembly();
+
             services.RegisterAssemblyPublicNonGenericClasses(assemblyToScan)
                     .Where(c => c.Name.EndsWith("Service"))
                     .AsPublicImplementedInterfaces();
@@ -78,7 +83,7 @@ namespace AutoRegisterServices
 
               .AddTypes(typeof(Service2), typeof(Service3))
 
-              .FromAssemblies(AppDomain.CurrentDomain.GetAssemblies())
+              .FromAssemblies(assemblies)
               .AddClasses(c => c.InNamespaceOf(typeof(IService)))
               .AsSelfWithInterfaces()
               .AsMatchingInterface((service, filter) =>
