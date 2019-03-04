@@ -16,9 +16,6 @@
 
         public PersonController(IPersonQueries personQueries) => PersonQueries = personQueries ?? throw new ArgumentNullException(nameof(personQueries));
 
-        /// <summary>
-        /// Get a Customer details
-        /// </summary>
         [HttpGet("{personId}", Name = "GetPerson")]
         public async Task<IActionResult> GetPerson(Guid personId, CancellationToken cancellationToken)
         {

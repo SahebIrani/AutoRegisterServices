@@ -33,7 +33,7 @@ namespace AutoRegisterServices
                     .UseStartup<Startup>()
                     .ConfigureAppConfiguration((builderContext, config) =>
                     {
-                        IHostingEnvironment env = builderContext.HostingEnvironment;
+                        //IHostingEnvironment env = builderContext.HostingEnvironment;
                         config.AddJsonFile("autofac.json");
                         config.AddEnvironmentVariables();
                     })

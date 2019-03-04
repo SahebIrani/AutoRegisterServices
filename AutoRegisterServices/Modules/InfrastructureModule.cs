@@ -21,9 +21,6 @@
               .WithParameter(new TypedParameter(typeof(DbContextOptions), optionsBuilder.Options))
               .InstancePerLifetimeScope();
 
-            //
-            // Register all Types in Chinook.Infrastructure
-            //
             builder.RegisterAssemblyTypes(typeof(ResultConverter).Assembly)
                 .AsImplementedInterfaces()
                 .InstancePerLifetimeScope();
