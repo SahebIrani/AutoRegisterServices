@@ -56,7 +56,7 @@ namespace AutoRegisterServices
 
             services.AddSingleton(typeof(IThing<>), typeof(GenericThing<>));
 
-            services.AddFactory<IShoppingCart, ShoppingCartDB>();
+            services.AddFactory<IRandomNumberGenerator, RandomNumberGenerator>();
 
             services.AddTransient<Func<string, IShoppingCart>>(serviceProvider => key =>
             {
@@ -81,9 +81,14 @@ namespace AutoRegisterServices
               .FromAssemblies(AppDomain.CurrentDomain.GetAssemblies())
               .AddClasses(c => c.InNamespaceOf(typeof(IService)))
               .AsSelfWithInterfaces()
+              .AsMatchingInterface((service, filter) =>
+                filter.Where(implementation =>
+                 implementation.Name.Equals($"I{service.Name}", StringComparison.OrdinalIgnoreCase)))
               .WithTransientLifetime()
 
-              .AddClasses(c => c.AssignableTo<NewService>())
+              .FromExecutingAssembly()
+              .FromApplicationDependencies(a => a.FullName.StartsWith("AutoRegisterServices"))
+              .AddClasses(c => c.AssignableTo<NewService>(), true)
               .AsMatchingInterface()
               .WithLifetime(ServiceLifetime.Singleton)
 
