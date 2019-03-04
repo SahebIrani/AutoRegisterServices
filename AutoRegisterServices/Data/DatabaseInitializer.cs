@@ -13,9 +13,11 @@ namespace AutoRegisterServices.Data
     {
         public static IApplicationBuilder EnsureSeedData(this IApplicationBuilder app)
         {
-            using (var scope = app.ApplicationServices.CreateScope())
+            //Context context = ServiceLocator.Current.GetRequiredInstance<Context>();
+
+            using (IServiceScope scope = app.ApplicationServices.CreateScope())
             {
-                var context = scope.ServiceProvider.GetService<Context>();
+                Context context = scope.ServiceProvider.GetService<Context>();
 
                 if (context != null && context.Database.GetPendingMigrations().Count() > 0) context.Database.Migrate();
 

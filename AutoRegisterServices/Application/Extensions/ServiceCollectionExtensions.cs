@@ -79,6 +79,8 @@ namespace AutoRegisterServices.Extensions
                     .AsPublicImplementedInterfaces();
         }
 
+        public static void AddServiceLocator(this IServiceCollection services) => ServiceLocator.SetLocatorProvider(services.BuildServiceProvider());
+
         public static IServiceCollection AddScrutor(this IServiceCollection services)
         {
             services.Scan(scan => scan
@@ -153,6 +155,8 @@ namespace AutoRegisterServices.Extensions
             services.AddFactory<IRandomNumberGenerator, RandomNumberGenerator>();
 
             services.AddAutoRegisterDi();
+
+            services.AddServiceLocator();
 
             services.AddScrutor();
 

@@ -1,4 +1,5 @@
-﻿using AutoRegisterServices.Services;
+﻿using AutoRegisterServices.Service;
+using AutoRegisterServices.Services;
 using AutoRegisterServices.Services2;
 
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -38,6 +39,8 @@ namespace AutoRegisterServices.Pages
 
         public void OnGet()
         {
+            string resultServiceLocator = ServiceLocator.Current.GetInstance<IMyService>().HelloWorld();
+
             string servicesResult = $"{Service2.ReturnValue(nameof(Service2))}," +
                                          $"{Service3.ReturnValue(nameof(Service3))}," +
                                          $"{Service.ReturnValue(nameof(Service))}," +
@@ -45,8 +48,10 @@ namespace AutoRegisterServices.Pages
                                          $"{Bar.ReturnValue(nameof(Bar))}," +
                                          $"{NewService.ReturnValue(nameof(NewService))}," +
                                          $"{OtherService.ReturnValue(nameof(OtherService))}," +
-                                         $"{OtherService2.ReturnValue(nameof(OtherService2))}"
+                                         $"{OtherService2.ReturnValue(nameof(OtherService2))}," +
+                                         $"{resultServiceLocator}"
             ;
+
             var result = servicesResult.Split(",");
             ResultListString = result;
         }
