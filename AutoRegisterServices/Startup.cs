@@ -2,6 +2,7 @@ using Autofac;
 using Autofac.Configuration;
 
 using AutoRegisterServices.Data;
+using AutoRegisterServices.Extensions;
 using AutoRegisterServices.GraphTypes;
 using AutoRegisterServices.Mappings;
 using AutoRegisterServices.Service;
@@ -54,6 +55,8 @@ namespace AutoRegisterServices
                 ;
 
             services.AddSingleton(typeof(IThing<>), typeof(GenericThing<>));
+
+            services.AddFactory<IShoppingCart, ShoppingCartDB>();
 
             services.AddTransient<Func<string, IShoppingCart>>(serviceProvider => key =>
             {
